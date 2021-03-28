@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Тема 26: Объекты в JavaScript</h1>
+    <form action="#" method="GET" class="taskform">
+      <fieldset class="taskform__taskunit" id="task1">
+        <legend>Задание №1</legend>
+        <p>
+          Создать объект, описывающий автомобиль (производитель, модель, год
+          выпуска, средняя скорость), и следующие функции для работы с этим
+          объектом: 
+          <ul>
+            <li>Функция для вывода на экран информации об автомобиле;</li>
+            <li>Функция для подсчета необходимого времени для преодоления
+                переданного расстояния со средней скоростью. Учтите, что через
+                каждые 4 часа дороги водителю необходимо делать перерыв на 1 час.</li>
+          </ul>
+        </p>
+        <div class="buttonsblock">
+          <button onclick="showCarInfo()">
+            About the Car
+          </button>
+          <button onclick="calcTransferTime()">
+            Plan Transfer
+          </button>
+        </div>
+      </fieldset>
+
+      <fieldset class="taskform__taskunit" id="task2">
+        <legend>Задание №2</legend>
+        <p>
+            Создать объект, хранящий в себе отдельно числитель и знаменатель дроби, и следующие функции для работы с этим объектом: 
+            <ul>
+              <li>
+                Функция сложения 2-х объектов-дробей;
+              </li>
+              <li>
+                Функция вычитания 2-х объектов-дробей;
+              </li>
+              <li>
+                Функция умножения 2-х объектов-дробей;
+              </li>
+              <li>
+                Функция деления 2-х объектов-дробей;
+              </li>
+              <li>
+                Функция сокращения объекта-дроби.
+              </li>
+            </ul>
+        </p>
+        <div class="buttonsblock">
+          <button onclick="initFractions()">
+            Initialize Fractions
+          </button>
+          <button onclick="addFractions()">
+            Add Fractions
+          </button>
+        </div>
+      </fieldset>
+      <fieldset class="taskform__taskunit" id="task3">
+        <legend>Задание №3</legend>
+        <p>
+          Создать объект, описывающий время (часы, минуты, секунды), и следующие функции для работы с этим объектом: 
+          <ul>
+            <li>
+              Функция вывода времени на экран;
+            </li>
+            <li>
+              Функция изменения времени на переданное количество секунд;
+            </li>
+            <li>
+              Функция изменения времени на переданное количество минут;
+            </li>
+            <li>
+              Функция изменения времени на переданное количество часов.
+            </li>
+          </ul>
+        </p>
+      </fieldset>
+    </form>
+  </body>
+</html>
