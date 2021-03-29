@@ -39,6 +39,11 @@ function calcTransferTime() {
 function Fraction(numerator, denominator) {
 	this.numerator = numerator;
 	this.denominator = denominator;
+	this.cancel = function() {
+		const fractionGCD = euclideanGCD(this.numerator, this.denominator);
+		this.numerator /= fractionGCD;
+		this.denominator /= fractionGCD;
+	}
 }
 
 function euclideanGCD(firstNum, secondNum) {
@@ -52,34 +57,75 @@ function euclideanGCD(firstNum, secondNum) {
 	return buf1;
 }
 
-const fractions = [];
+let fractions = [];
 let commonDenominator;
+let reductedToCommonFractions = [];
+
 function initFractions(amount = 2) {
 	for (let i = 1; i <= amount; i++) {
 		let numerator = +prompt(`Type numerator of fraction #${i}`);
 		let denominator = +prompt(`Type denominator of fraction #${i}`);
 		let newFraction = new Fraction(numerator, denominator);
+		newFraction.cancel();
 		fractions.push(newFraction);
 	};
-	commonDenominator = reductToCommonDenominator(fractions[0], fractions[1]);
+	reductedToCommonFractions = reductToCommonDenominator(fractions[0], fractions[1]);
 }
 
 function reductToCommonDenominator(fraction1, fraction2) {
-	const denominator1 = fraction1.denominator;
-	const denominator2 = fraction2.denominator;
-	const leastCommonMultiple = Math.abs(denominator1 * denominator2) / euclideanGCD(denominator1, denominator2);
-	fraction1.numerator *= leastCommonMultiple / fraction1.denominator;
-	fraction2.numerator *= leastCommonMultiple / fraction2.denominator;
-	fraction1.denominator = leastCommonMultiple;
-	fraction2.denominator = leastCommonMultiple;
-
-	return leastCommonMultiple;
+	const leastCommonMultiple = 
+		Math.abs(fraction1.denominator * fraction2.denominator) 
+		/ euclideanGCD(fraction1.denominator, fraction2.denominator);
+	
+	commonDenominator = leastCommonMultiple;
+	return [
+		new Fraction (
+			fraction1.numerator * leastCommonMultiple / fraction1.denominator,
+			leastCommonMultiple
+		),
+		new Fraction (
+			fraction2.numerator * leastCommonMultiple / fraction2.denominator,
+			leastCommonMultiple
+		)
+	];
 }
 
 function addFractions() {
 	const resultFract = new Fraction (
-		fractions[0].numerator + fractions[1].numerator,
+		reductedToCommonFractions[0].numerator + reductedToCommonFractions[1].numerator,
 		commonDenominator
 	);
 	alert(`Adiing your's fractions gives ${resultFract.numerator} / ${resultFract.denominator}`);
+}
+
+function substractFractions() {
+	const resultFract = new Fraction (
+		reductedToCommonFractions[0].numerator - reductedToCommonFractions[1].numerator,
+		commonDenominator
+	);
+	alert(`Substacting your's fractions gives ${resultFract.numerator} / ${resultFract.denominator}`);
+}
+
+function multiplyFractions() {
+	const resultFract = new Fraction (
+		fractions[0].numerator * fractions[1].numerator,
+		fractions[0].denominator * fractions[1].denominator
+	);
+	alert(`Multiplying your's fractions gives ${resultFract.numerator} / ${resultFract.denominator}`);
+}
+
+function divideFractions() {
+	const resultFract = new Fraction (
+		fractions[0].numerator * fractions[1].denominator,
+		fractions[0].denominator * fractions[1].numerator
+	);
+	alert(`Dividing your's fractions gives ${resultFract.numerator} / ${resultFract.denominator}`);
+}
+
+function cancelFraction() {
+	let numer = +prompt(`Type numerator of fraction`);
+	let denomin = +prompt(`Type denominator of fraction`);
+	let testFraction = new Fraction(numer, denomin);
+	testFraction.cancel();
+	alert(`Cancelled fractions gives ${testFraction.numerator} / ${testFraction.denominator}`);
 }
