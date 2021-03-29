@@ -129,3 +129,87 @@ function cancelFraction() {
 	testFraction.cancel();
 	alert(`Cancelled fractions gives ${testFraction.numerator} / ${testFraction.denominator}`);
 }
+
+//-------------------------------
+let Time = {
+	hours: 			0,
+	minutes:		0,
+	seconds:		0,
+
+	display: () => {
+		alert(`Current time is ${this.hours} : ${this.minutes} : ${this.seconds}`);
+	},
+
+	addSeconds: (secondsAmount) => {
+		if (Math.abs(secondsAmount) > 60) {
+			this.addMinutes(
+				Math.trunc(secondsAmount / 60)
+			);
+			this.seconds += secondsAmount % 60;
+		} else {
+			this.seconds += secondsAmount;
+		};
+		if (this.seconds >= 60) {
+			this.minutes++;
+			this.seconds = this.seconds - 60;
+		};
+	},
+
+	addMinutes: (minutesAmount) => {
+		if (Math.abs(minutesAmount) > 60) {
+			this.addHours(
+				Math.trunc(minutesAmount / 60)
+			);
+			this.minutes += minutesAmount % 60;
+		} else {
+			this.minutes += minutesAmount;
+		};
+		if (this.minutes >= 60) {
+			this.addHours(1);
+			this.minutes = this.minutes - 60;
+		};
+	},
+
+	addHours: (hoursAmount) => {
+		if (Math.abs(hoursAmount) > 24) {
+			if (Math.trunc(hoursAmount / 24) > 1) {
+				this.hours += hoursAmount % 24;
+			} else {
+				this.hours += Math.sign(Math.abs(hoursAmount) - 24);
+			}
+			
+		} else {
+			this.hours = this.hours + hoursAmount;
+		};
+		if (this.hours >= 24) {
+			this.hours = this.hours - 24;
+		};
+	},
+}
+
+let timeStamp = Object.create(Time);
+function initTime() {
+	const hr = +prompt('Type hours, please');
+	const min = +prompt('Type minutes, please');
+	const sec = +prompt('Type seconds, please')
+	
+	timeStamp.addHours(hr);
+	timeStamp.addMinutes(min);
+	timeStamp.addSeconds = sec;
+	timeStamp.display();
+}
+
+function adjustSeconds() {
+	timeStamp.addSeconds(+prompt('Type seconds to adjust, please'));
+	timeStamp.display();
+}
+
+function adjustMinutes() {
+	timeStamp.addMinutes(+prompt('Type minutes to adjust, please'));
+	timeStamp.display();
+}
+
+function adjustHours() {
+	timeStamp.addHours(+prompt('Type hours to adjust, please'));
+	timeStamp.display();
+}
