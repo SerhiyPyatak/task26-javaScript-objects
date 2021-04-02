@@ -136,11 +136,11 @@ let Time = {
 	minutes:		0,
 	seconds:		0,
 
-	display: () => {
+	display: function() {
 		alert(`Current time is ${this.hours} : ${this.minutes} : ${this.seconds}`);
 	},
 
-	addSeconds: (secondsAmount) => {
+	addSeconds: function(secondsAmount) {
 		if (Math.abs(secondsAmount) > 60) {
 			this.addMinutes(
 				Math.trunc(secondsAmount / 60)
@@ -155,7 +155,7 @@ let Time = {
 		};
 	},
 
-	addMinutes: (minutesAmount) => {
+	addMinutes: function(minutesAmount) {
 		if (Math.abs(minutesAmount) > 60) {
 			this.addHours(
 				Math.trunc(minutesAmount / 60)
@@ -170,7 +170,7 @@ let Time = {
 		};
 	},
 
-	addHours: (hoursAmount) => {
+	addHours: function(hoursAmount) {
 		if (Math.abs(hoursAmount) > 24) {
 			if (Math.trunc(hoursAmount / 24) > 1) {
 				this.hours += hoursAmount % 24;
